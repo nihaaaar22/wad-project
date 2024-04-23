@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Simple Calculator</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
+  <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+  <script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div data-role="page" id="calculator">
+        <div data-role="header">
+          <h1>Simple Calculator</h1>
+        </div>
+        <div data-role="content">
+          <input type="text" id="result" readonly>
+          <div class="clearfix">
+            <button class="ui-btn" data-role="button" data-icon="delete" id="clear">C</button>
+            <button class="ui-btn" data-role="button" id="backspace">←</button>
+            <button class="ui-btn" data-role="button" id="divide">/</button>
+            <button class="ui-btn" data-role="button" id="7">7</button>
+          </div>
+          <div class="clearfix">
+            <button class="ui-btn" data-role="button" id="8">8</button>
+            <button class="ui-btn" data-role="button" id="9">9</button>
+            <button class="ui-btn" data-role="button" id="multiply">*</button>
+            <button class="ui-btn" data-role="button" id="4">4</button>
+          </div>
+          <div class="clearfix">
+            <button class="ui-btn" data-role="button" id="5">5</button>
+            <button class="ui-btn" data-role="button" id="6">6</button>
+            <button class="ui-btn" data-role="button" id="subtract">-</button>
+            <button class="ui-btn" data-role="button" id="1">1</button>
+          </div>
+          <div class="clearfix">
+            <button class="ui-btn" data-role="button" id="2">2</button>
+            <button class="ui-btn" data-role="button" id="3">3</button>
+            <button class="ui-btn" data-role="button" id="add">+</button>
+            <button class="ui-btn" data-role="button" id="0">0</button>
+          </div>
+          <div class="clearfix">
+            <button class="ui-btn" data-role="button" id="decimal">.</button>
+            <button class="ui-btn" data-role="button" id="equals">=</button>
+          </div>
+
+      <script>
+        $(document).ready(function() {
+          var result = "";
+          var operator = "";
+
+          $("#clear").on("click", function() {
+            result = "";
+            $("#result").val("");
+          });
+
+          $("#backspace").on("click", function() {
+            result = result.substring(0, result.length - 1);
+            $("#result").val(result);
+          });
+
+          $(".ui-btn").not("#clear, #backspace, #equals").on("click", function() {
+            result += $(this).text();
+            $("#result").val(result);
+          });
+
+          $("#equals").on("click", function() {
+            try {
+              result = eval(result);
+              $("#result").val(result);
+            } catch (e) {
+              $("#result").val("Error");
+            }
+          });
+        });
+      </script>
+    </div>
+  </div>
+</body>
+</html>
